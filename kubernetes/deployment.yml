@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nikestore
+  labels:
+    app: nikestore
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nikestore
+  template:
+    metadata:
+      labels:
+        app: nikestore
+    spec:
+      containers:
+        - name: nikestore
+          image: jobinaj/nikestore:latest
+          ports:
+            - containerPort: 5173
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          env:
+            - name: NODE_ENV
+              value: "production"
